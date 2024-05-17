@@ -1,9 +1,13 @@
+import sqlite3
+
 from tkinter import *
 from tkinter.font import Font
 import Ingresar_usuarios
 import Ingresar_ventas
 
 root = Tk()
+con = sqlite3.connect("database.db")
+cursor = con.cursor()
 
 root.title("Empresa Kosmos")
 root.geometry("600x400")
