@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter.font import Font
+import Ingresar_usuarios
+import Ingresar_ventas
 
 root = Tk()
 
