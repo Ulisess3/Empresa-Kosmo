@@ -1,7 +1,6 @@
 from tkinter import *
 
-root = Tk()
-root.title("Ingresar Venta")
-root.geometry("400x200")
-
-root.mainloop()
+def venta():
+    vtn = Toplevel()
+    vtn.title("Comprar producto")
+    vtn.geometry("400x200")
