@@ -31,15 +31,17 @@ Imagen1 = Label(root, image=poleron).place(x=20, y=80)
 Label(root, text="Polerón Negro", bg="lightgray", font=fuente).place(x=40, y=248)
 Label(root, text="$15.000", bg="lightgray").place(x=80, y=275)
 
-vender = Ingresar_ventas.venta
+vender_poleron = Ingresar_ventas.poleron
 
-Button(root, command=vender, text="COMPRAR").place(x=70, y=300)
+Button(root, command=vender_poleron, text="COMPRAR").place(x=70, y=300)
 
 #Pantalón Jeans
 Imagen2 = Label(root, image=pantalon).place(x=220, y=80)
 Label(root, text="Pantalón Jeans", bg="lightgray", font=fuente).place(x=240, y=248)
 Label(root, text="$12.000", bg="lightgray").place(x=280, y=275)
 
-Button(root, text="COMPRAR").place(x=270, y=300)
+vender_pantalon = Ingresar_ventas.pantalon
+
+Button(root, text="COMPRAR", command=vender_pantalon).place(x=270, y=300)
 
 root.mainloop()
