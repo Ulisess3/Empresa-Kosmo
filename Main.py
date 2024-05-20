@@ -1,12 +1,9 @@
-import sqlite3
 from tkinter import *
 from tkinter.font import Font
 
 import Ingresar_ventas
 
 root = Tk()
-con = sqlite3.connect("database.db")
-cursor = con.cursor()
 
 root.title("Empresa Kosmos")
 root.geometry("600x400")
@@ -29,7 +26,8 @@ Label(top, text="KOSMOS", bg="gray", font=titulo).place(x=30, y=10)
 #Polerón Negro
 Imagen1 = Label(root, image=poleron).place(x=20, y=80)
 Label(root, text="Polerón Negro", bg="lightgray", font=fuente).place(x=40, y=248)
-Label(root, text="$15.000", bg="lightgray").place(x=80, y=275)
+Label(root, text="$", bg="lightgray").place(x=80, y=275)
+Label(root, text=Ingresar_ventas.precio_poleron, bg="lightgray").place(x=90, y=275)
 
 vender_poleron = Ingresar_ventas.poleron
 
@@ -38,7 +36,8 @@ Button(root, command=vender_poleron, text="COMPRAR").place(x=70, y=300)
 #Pantalón Jeans
 Imagen2 = Label(root, image=pantalon).place(x=220, y=80)
 Label(root, text="Pantalón Jeans", bg="lightgray", font=fuente).place(x=240, y=248)
-Label(root, text="$12.000", bg="lightgray").place(x=280, y=275)
+Label(root, text="$", bg="lightgray").place(x=280, y=275)
+Label(root, text=Ingresar_ventas.precio_pantalon, bg="lightgray").place(x=290, y=275)
 
 vender_pantalon = Ingresar_ventas.pantalon
 
