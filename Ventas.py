@@ -3,6 +3,7 @@ from tkinter.font import Font
 import sqlite3
 import tkinter.messagebox as messagebox
 from tkinter.simpledialog import askinteger
+from tkinter import ttk
 
 con = sqlite3.connect("database.db")
 cursor = con.cursor()
@@ -45,7 +46,6 @@ def poleron():
             else:
                 messagebox.showinfo("Info", "El producto fue comprado correctamente")
         else:
-            messagebox.showinfo("Info", "Compra cancelada")
             vtn.destroy()
 
     Button(vtn, text="COMPRAR", command=comprar).place(x=200, y=160)
@@ -90,10 +90,51 @@ def pantalon():
             else:
                 messagebox.showinfo("Info", "El producto fue comprado correctamente")
         else:
-            messagebox.showinfo("Info", "Compra cancelada")
             vtn.destroy()
 
     Button(vtn, text="COMPRAR", command=comprar).place(x=200, y=160)
     Button(vtn, text="CANCELAR", command=cancelar).place(x=300, y=160)
 
     vtn.mainloop()
+
+cursor.execute('select * from productos')
+datos = cursor.fetchall()
+
+def ver():    
+    tabla = ttk.Treeview(columns=("#1","#2","#3","#4"))
+    tabla.grid(row=0, column=0)
+    tabla.heading("#0", text="", anchor=CENTER)
+    tabla.heading("#1", text="ID", anchor=CENTER)
+    tabla.heading("#2", text="Nombre", anchor=CENTER)
+    tabla.heading("#3", text="Precio", anchor=CENTER)
+    tabla.heading("#4", text="Cantidad", anchor=CENTER)
+
+    def borrar_fila():
+        seleccion = tabla.selection()
+    
+        if len(seleccion) != 0:
+            fila_id = tabla.item(seleccion)['values'][0]
+        
+            cursor.execute("DELETE FROM productos WHERE ID=?", (fila_id,))
+            con.commit()
+        
+            tabla.delete(seleccion)
+        else:
+            messagebox.showwarning("Advertencia", "Por favor, seleccione una fila para borrar.")
+
+    for col in tabla["columns"]:
+        tabla.column(col, anchor=CENTER)
+
+    tabla.column("#0", width=0)
+    tabla.column("#1", width=100)
+    tabla.column("#2", width=200)
+    tabla.column("#3", width=150)
+    tabla.column("#4", width=150)
+
+    for x in datos:
+        tabla.insert("", END, values=x[0:])
+    
+    f = Frame(bg="white", width=600, height=50, borderwidth=1, relief="sunken").grid(row=1, column=0)
+
+    boton_borrar = Button(f,text="Borrar fila", command=borrar_fila)
+    boton_borrar.grid(row=1, column=0)
